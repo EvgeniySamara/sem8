@@ -1,4 +1,6 @@
 
+import csv
+
 # 'cp1251'
 # 'cp-1251'
 # f = open('myfile.txt', 'w', encoding='utf-8')
@@ -26,6 +28,10 @@
 # main.py
 # FILE_NAME = 'phone_book.txt'
 from typing import List
+
+def copy_to_file (file, data):
+    pass
+
 def read_file(file):
     try:
         with open(file, 'r', encoding='utf-8') as f:
@@ -36,8 +42,8 @@ def read_file(file):
         return []
 
 def show_data(data: list):
-    for line in data:
-        print(line)
+    for line in enumerate(data):
+        print(line[0]+1,line[1])
     # with open('phone_book.txt', 'r', encoding='utf-8') as f:
     #     lines = f.readlines()
     #     for line in lines:
@@ -83,6 +89,7 @@ def main():
         print('1 - запись в файл')
         print('2 - показать записи')
         print('3 - найти запись')
+        print('4 - экспорт выбранных контактов в csv файл')       
         answer = input('Выберите действие: ')
         if answer == '0':
             flag = False
@@ -95,6 +102,9 @@ def main():
             data = read_file(file_name)
             founded_data = search_data(data)
             show_data(founded_data)
+        elif answer == '4':
+            print ("введите имя файла для экспорта", end = ' ')
+
 
 if __name__ == '__main__':
     main()
