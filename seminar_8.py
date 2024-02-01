@@ -1,5 +1,5 @@
 
-import csv
+import csv,os
 
 # 'cp1251'
 # 'cp-1251'
@@ -29,6 +29,11 @@ import csv
 # FILE_NAME = 'phone_book.txt'
 from typing import List
 
+def clear_console():
+    os.system('clear')
+
+
+
 def copy_to_file (file, data):
     pass
 
@@ -42,6 +47,8 @@ def read_file(file):
         return []
 
 def show_data(data: list):
+    print()
+    print('Содержимое справочника:')
     for line in enumerate(data):
         print(line[0]+1,line[1])
     # with open('phone_book.txt', 'r', encoding='utf-8') as f:
@@ -82,8 +89,16 @@ def search_data(contacts: List[str]):
     return founded
 
 def main():
+    clear_console()
+    #print(os.getcwd())
+         
+    #print(os.listdir(r"."))
     file_name = 'phone_book.txt'
-    flag = True
+    if os.path.exists(file_name):
+        print ('Найден и загружен телефонный справочник')
+        data = read_file(file_name)
+        flag = True
+
     while flag:
         print('0 - выход')
         print('1 - запись в файл')
@@ -103,7 +118,11 @@ def main():
             founded_data = search_data(data)
             show_data(founded_data)
         elif answer == '4':
-            print ("введите имя файла для экспорта", end = ' ')
+            print ("введите имя файла для экспорта (без расширения)", end = ' ')
+            csv_file_name = input().strip()+'.csv'
+            print (csv_file_name)
+            data = read_file(file_name)
+            show_data(data)
 
 
 if __name__ == '__main__':
