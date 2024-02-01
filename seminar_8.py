@@ -1,7 +1,5 @@
 
 import csv,os
-
-
 from typing import List
 
 def clear_console():
@@ -77,7 +75,7 @@ def read_file(file):
 
 def show_data(data: list):
     print()
-    print (data)
+    #print (data)
     print('Содержимое справочника:')
     for line in enumerate(data):
         print(line[0]+1,line[1])
@@ -115,11 +113,12 @@ def main():
 
     while flag:
         print('0 - выход')
-        print('1 - запись в файл')
+        print('1 - добавить запись в файл')
         print('2 - показать записи')
         print('3 - найти запись')
         print('4 - редактировать запись')
-        print('5 - экспорт выбранных контактов в csv файл')       
+        print('5 - удалить запись')
+        print('6 - экспорт выбранных контактов в csv файл')       
         answer = input('Выберите действие: ')
         if answer == '0':
             flag = False
@@ -138,9 +137,16 @@ def main():
              print ('Введите номер строки для редактирования:') 
              idx = int(input())-1
              edit_line(data,idx,file_name)
-                    
+        elif answer == '5': 
+             data = read_file(file_name)
+             show_data(data) 
+             print ('Введите номер строки для удаления:') 
+             idx = int(input())-1
+             del data[idx]
+             print (['Ошибка удаления','изменения зафиксированы'][save_data(file_name,data)]   )
+                               
 
-        elif answer == '5':
+        elif answer == '6':
             print ("введите имя файла для экспорта (без расширения)", end = ' ')
             csv_file_name = input().strip()+'.csv'
             data = read_file(file_name)
