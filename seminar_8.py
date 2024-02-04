@@ -38,7 +38,7 @@ def edit_line (data,idx,file_name):
         print ('Введите новое значение')
         pars = data[idx].split(', ')
         pars[answer] = input()
-        data[idx] = ', '.join(pars)
+        data[idx] = ', '.join(pars)+'\n'
         # print (data)
         # for line in data:
         #             line = line.split(', ')
@@ -109,7 +109,7 @@ def main():
     if os.path.exists(file_name):
         print ('Найден и загружен телефонный справочник')
         data = read_file(file_name)
-        flag = True
+    flag = True
 
     while flag:
         print('0 - выход')
